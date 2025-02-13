@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine? ❤️</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #ffe6e6;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+        }
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: #ff4d6d;
+            animation: fadeOut 5s forwards;
+            animation-delay: 5s;
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; visibility: hidden; }
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin: auto;
+            animation: fadeIn 1s ease-in-out;
+            display: none;
+        }
+        h1 {
+            color: #ff4d6d;
+            animation: bouncy 1.5s infinite;
+        }
+        .restaurant-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .restaurant-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+            padding: 10px;
+            width: 150px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .restaurant-card:hover {
+            transform: scale(1.1);
+        }
+        .restaurant-card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .restaurant-card p {
+            margin: 10px 0 0;
+            font-weight: bold;
+            color: #ff4d6d;
+        }
+        .hidden {
+            display: none;
+        }
+        .runaway-button {
+            background-color: #ff1a4d;
+            color: white;
+            border: none;
+            position:relative;
+            padding: 15px 20px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            transform: translate(-50%, -50%);
+            transition: all 0.1s ease-in-out;
+            animation: bouncy 1.5s infinite;
+        }
+        .runaway-button:hover {
+            background-color: #ff3366;
+            transform: scale(1.1);
+            box-shadow: 0px 4px 10px rgba(255, 0, 76, 0.4);
+        }
+        #yes-button {
+            background-color: #ff1a4d;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: bouncy 1.5s infinite;
+        }
+        #yes-button:hover {
+            background-color: #ff3366;
+            transform: scale(1.1);
+            box-shadow: 0px 4px 10px rgba(255, 0, 76, 0.4);
+        }
+        #yes-button-final {
+            background-color: #ff1a4d;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: bouncy 1.5s infinite;
+        }
+        #yes-button-final:hover {
+            background-color: #ff3366;
+            transform: scale(1.1);
+            box-shadow: 0px 4px 10px rgba(255, 0, 76, 0.4);
+        }
+        @keyframes bouncy {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-screen"><h1>Loading... 💖</h1></div>
+    
+    <div class="container" id="interaction-page">
+        <h1>Will You Be My Valentine? ❤️</h1>
+    </div>
+
+    <button id="yes-button" class="hidden" onclick="showMainPage()">Yes 💕</button>
+    <button id="no-button" class="runaway-button hidden" onclick="run()">No 😢</button>
+
+    <div class="container hidden" id="main-page">
+        <h1>Pick a place for our date: ❤️</h1>
+        
+        <div class="restaurant-options">
+            <div class="restaurant-card" onclick="selectRestaurant('Chirstine Bakery', 'https://christinebakery.my/specialty/')">
+                <img src="Christines-Sign.png" alt="Chirstine Bakery">
+                <p>Chirstine Bakery</p>
+            </div>
+            <div class="restaurant-card" onclick="selectRestaurant('Naughty Babe Dirty Duck', 'https://www.naughtybabedirtyduck.com/')">
+                <img src="NBDD.png" alt="Naughty Babe Dirty Duck">
+                <p>Naughty Babe Dirty Duck</p>
+            </div>
+            <div class="restaurant-card" onclick="selectRestaurant('Souled Out', 'https://cdn.prod.website-files.com/6482e0c9e79aa55d3a480903/66d045cf04eef656869810dc_SOG-Sept24-Food-Menu.pdf')">
+                <img src="souled.jpg" alt="Souled Out">
+                <p>Souled Out</p>
+            </div>
+        </div>
+        <p id="selected-restaurant" class="hidden"></p>
+
+        <button id="yes-button-final" class="hidden" onclick="showFinalPage()">Yes, I'd love to! 💕</button>
+    </div>
+    
+    <div class="container hidden" id="final-page">
+        <h1>Yay! Here’s our plan 🎉💖</h1>
+        <p id="final-restaurant"></p>
+        <h2>Our Date Itinerary:</h2>
+        <p>🍽 Dinner at <span id="restaurant-name"></span></p>
+        <p>🎶 Attending the Mini Concert</p>
+        <p>💖 Spending a magical night together!</p>
+    </div>
+
+    <script>
+        setTimeout(() => {
+            document.querySelector('.loading-screen').style.display = 'none';
+            document.getElementById('interaction-page').style.display = 'block';
+            document.getElementById("yes-button").classList.remove("hidden");
+            document.getElementById("no-button").classList.remove("hidden");
+        }, 3000);
+        
+        function selectRestaurant(name, menu) {
+            document.getElementById("selected-restaurant").innerHTML = `You selected <strong>${name}</strong>. <a href="${menu}" target="_blank">View Menu</a>`;
+            document.getElementById("selected-restaurant").classList.remove("hidden");
+            document.getElementById("yes-button-final").classList.remove("hidden");
+            document.getElementById("restaurant-name").innerText = name;
+        }
+
+        function showMainPage() {
+            document.getElementById('interaction-page').style.display = 'none';
+            document.querySelector('#yes-button').style.display = 'none';
+            document.querySelector('.runaway-button').style.display = 'none';
+            document.getElementById('main-page').style.display = 'block';
+        }
+        
+        function showFinalPage() {
+            document.getElementById('main-page').style.display = 'none';
+            document.getElementById('final-page').style.display = 'block';
+        }
+
+        function showFinalPage() {
+            document.getElementById('main-page').style.display = 'none';
+            document.getElementById('final-page').style.display = 'block';
+        }
+
+        function run() {
+            const button = document.getElementById("no-button");
+            
+            const maxWidth = 100;
+            const maxHeight = 500;
+
+            const randomX = Math.random() * maxWidth;
+            const randomY = Math.random() * maxHeight;
+
+            button.style.left = `${randomX}px`;
+            button.style.top = `${randomY}px`;
+        }
+        
+
+    </script>
+</body>
+</html>
